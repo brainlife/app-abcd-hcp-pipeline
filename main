@@ -1,0 +1,23 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=8,vmem=16gb,walltime=24:00:00
+#PBS -N ABCD-HCP-pipeline
+#PBS -V
+
+set -e
+set -x
+
+export FREESURFER_LICENSE="hayashis@iu.edu 29511 *CPmh9xvKQKHE FSg0ijTusqaQc"
+echo $FREESURFER_LICENSE > license.txt
+
+mkdir -p output
+
+bl2bids
+
+singularity build abcd-hcp-pipeline.img docker://dcanlabs/abcd-hcp-pipeline
+
+singularity run \
+  -B `pwd`/bids:/bids:ro \
+  -B `pwd`/output:/output \
+  -B `pwd`/license.txt:/opt/freesurfer/license.txt \
+  ./abcd-hcp-pipeline.img /bids /output --freesurfer-license=/opt/freesurfer/license.txt \
+  --stage PreFreeSurfer --ignore func --ncpus 8
