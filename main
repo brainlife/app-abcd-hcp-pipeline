@@ -19,5 +19,5 @@ singularity run -e \
   -B `pwd`/bids:/bids \
   -B `pwd`/output:/output \
   -B `pwd`/license.txt:/opt/freesurfer/license.txt \
-  ./abcd-hcp-pipeline.img /bids /output --freesurfer-license=/opt/freesurfer/license.txt \
+  docker://dcanlabs/abcd-hcp-pipeline /bids /output --freesurfer-license=/opt/freesurfer/license.txt \
   --stage PreFreeSurfer --ignore func --ncpus 8
