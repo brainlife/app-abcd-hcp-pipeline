@@ -13,9 +13,9 @@ mkdir -p output
 
 bl2bids
 
-singularity build abcd-hcp-pipeline.img docker://dcanlabs/abcd-hcp-pipeline
+#singularity build abcd-hcp-pipeline.img docker://dcanlabs/abcd-hcp-pipeline
 
-singularity run \
+singularity run -e \
   -B `pwd`/bids:/bids \
   -B `pwd`/output:/output \
   -B `pwd`/license.txt:/opt/freesurfer/license.txt \
