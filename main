@@ -11,7 +11,11 @@ echo $FREESURFER_LICENSE > license.txt
 
 mkdir -p output
 
+#convert input into bids
 bl2bids
+
+stage=`jq -r '.stage' config.json`
+echo "Begin from $stage, continuing through..."
 
 #singularity build abcd-hcp-pipeline.img docker://dcanlabs/abcd-hcp-pipeline
 
@@ -20,4 +24,4 @@ singularity run -e \
   -B `pwd`/output:/output \
   -B `pwd`/license.txt:/opt/freesurfer/license.txt \
   docker://dcanlabs/abcd-hcp-pipeline /bids /output --freesurfer-license=/opt/freesurfer/license.txt \
-  --stage PreFreeSurfer --ignore func --ncpus 8
+  --stage $stage --ignore func --ncpus 8
