@@ -15,13 +15,38 @@ mkdir -p output
 bl2bids
 
 stage=`jq -r '.stage' config.json`
+inT1w=`jq -r '.t1' config.json`
 echo "Begin from $stage, continuing through..."
+
+#####################################################################################
+#####################################################################################
+# some logical checks
+if [[ $inT1w = "null" ]] ; then
+	echo "app needs minimally a T1w. exiting"
+	exit 1
+fi
+
+# avoid templateflow problems on HPC's running singularity
+mkdir -p templateflow
+export SINGULARITYENV_TEMPLATEFLOW_HOME=$PWD/templateflow
+
+# set FreeSurfer
+[ -z "$FREESURFER_LICENSE" ] && echo "Please set FREESURFER_LICENSE in .bashrc" && exit 1;
+
+sub=$(jq -r "._inputs[0].meta.subject" config.json | tr -d "_")
+if [[ -z $sub || $sub == null ]]; then
+    sub=0
+fi
 
 #singularity build abcd-hcp-pipeline.img docker://dcanlabs/abcd-hcp-pipeline
 
-singularity run -e \
+singularity exec -e \
   -B `pwd`/bids:/bids \
   -B `pwd`/output:/output \
-  -B `pwd`/license.txt:/opt/freesurfer/license.txt \
-  docker://dcanlabs/abcd-hcp-pipeline /bids /output --freesurfer-license=/opt/freesurfer/license.txt \
-  --stage $stage --ignore func --ncpus 8
+  docker://dcanlabs/abcd-hcp-pipeline:v0.0.3 \
+  /bids /output \
+  --freesurfer-license="$FREESURFER_LICENSE" \
+  --participant-label $sub \
+  --stage $stage \
+  --ignore func \
+  --ncpus 8
