@@ -52,6 +52,7 @@ fi
 singularity run \
   -B `pwd`/bids:/bids \
   -B `pwd`/output:/output \
+  -B `pwd`/license.txt:/opt/freesurfer/license.txt \
   docker://dcanlabs/abcd-hcp-pipeline:v0.0.3 \
   /bids /output \
   --freesurfer-license=/opt/freesurfer/license.txt \
