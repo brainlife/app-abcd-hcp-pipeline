@@ -58,6 +58,5 @@ singularity run \
   --freesurfer-license=/opt/freesurfer/license.txt \
   --participant-label $sub \
   --stage $stage \
-  --ignore func \
   --ncpus 8 \
   $optional
