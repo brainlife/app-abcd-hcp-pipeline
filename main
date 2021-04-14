@@ -42,7 +42,7 @@ singularity run \
   -B `pwd`/output:/output \
   docker://dcanlabs/abcd-hcp-pipeline:v0.0.3 \
   /bids /output \
-  --freesurfer-license=license.txt \
+  --freesurfer-license=/opt/freesurfer/license.txt \
   --participant-label $sub \
   --stage $stage \
   --ignore func \
