@@ -16,6 +16,8 @@ bl2bids
 
 stage=`jq -r '.stage' config.json`
 inT1w=`jq -r '.t1' config.json`
+inFMRI=`jq -r '.bold' config.json`
+inDWI=`jq -r '.dwi' config.json`
 echo "Begin from $stage, continuing through..."
 
 #####################################################################################
@@ -35,6 +37,16 @@ if [[ -z $sub || $sub == null ]]; then
     sub=0
 fi
 
+optional=""
+
+if [[ $inFMRI = "null" ]] ; then
+	optional="$optional --ignore func"
+fi
+
+if [[ $inDWI = "null" ]] ; then
+	optional="$optional --ignore dwi"
+fi
+
 #singularity build abcd-hcp-pipeline.img docker://dcanlabs/abcd-hcp-pipeline
 
 singularity run \
@@ -46,4 +58,5 @@ singularity run \
   --participant-label $sub \
   --stage $stage \
   --ignore func \
-  --ncpus 8
+  --ncpus 8 \
+  $optional
