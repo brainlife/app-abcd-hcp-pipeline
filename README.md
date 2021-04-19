@@ -51,7 +51,7 @@ https://github.com/DCAN-Labs/abcd-hcp-pipeline.
 
 ### Inputs
 
-This App requires at least one T1w scan, and optionally one (or more) functional data. If only the T1w is provided, only the structural preprocessing will be run. As in the original pipeline, you can select the step of the analysis (stage) to begin with; possible options are: PreFreeSurfer, FreeSurfer, PostFreeSurfer, FMRIVolume, FMRISurface, DCANBOLDProcessing, ExecutiveSummary, CustomClean. (fieldmap input coming soon)
+This App requires at least one T1w scan, and optionally one (or more) functional data. If only the T1w is provided, only the structural preprocessing will be run. In all the cases, the starting step of the analysis (stage) is PreFreeSurfer. (fieldmap input coming soon)
 
 ### Outputs
 
