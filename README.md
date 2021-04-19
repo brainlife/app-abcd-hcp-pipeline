@@ -1,4 +1,4 @@
-(currently under development, use at your own risk)
+(currently under development, run at your own risk)
 
 [![Abcdspec-compliant](https://img.shields.io/badge/ABCD_Spec-v1.1-green.svg)](https://github.com/brain-life/abcd-spec)
 [![Run on Brainlife.io](https://img.shields.io/badge/Brainlife-bl.app.452-blue.svg)](https://doi.org/10.25663/brainlife.app.452)
@@ -36,7 +36,7 @@ We ask that you cite the following articles when publishing papers that used dat
 
 3. Avesani, P., McPherson, B., Hayashi, S. et al. The open diffusion data derivatives, brain data upcycling via integrated publishing of derivatives and reproducible open cloud services. Sci Data 6, 69 (2019). [https://doi.org/10.1038/s41597-019-0073-y](https://doi.org/10.1038/s41597-019-0073-y)
 
-For the full list of reference, please see https://github.com/DCAN-Labs/abcd-hcp-pipeline.
+For the full list of references, please see https://github.com/DCAN-Labs/abcd-hcp-pipeline.
 
 ## Running the App 
 
