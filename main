@@ -39,11 +39,11 @@ fi
 
 optional=""
 
-if [[ $inFMRI = "null" ]] ; then
+if [[ $inFMRI = '' ]] ; then
 	optional="$optional --ignore func"
 fi
 
-if [[ $inDWI = "null" ]] ; then
+if [[ $inDWI = '' ]] ; then
 	optional="$optional --ignore dwi"
 fi
 
