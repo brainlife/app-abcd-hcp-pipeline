@@ -39,12 +39,8 @@ fi
 
 optional=""
 
-if [[ $inFMRI = '' ]] ; then
+if [[ $inFMRI = [] ]] ; then
 	optional="$optional --ignore func"
-fi
-
-if [[ $inDWI = '' ]] ; then
-	optional="$optional --ignore dwi"
 fi
 
 #singularity build abcd-hcp-pipeline.img docker://dcanlabs/abcd-hcp-pipeline
